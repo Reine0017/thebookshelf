@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const config = require("./config/config").get(process.env.NODE_ENV);
 const app = express();
 
+const user = require("./routes/user");
+
 mongoose.connect(config.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -14,6 +16,7 @@ mongoose.connect(config.DATABASE, {
 
 //MIDDLEWARE
 app.use(bodyParser.json());
+app.use("api/users", user);
 
 const port = process.env.PORT || 3005;
 app.listen(port, () => {
